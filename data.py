@@ -55,4 +55,43 @@ def sort_by_column(my_table, col_idx):
     the column col_idx appear in DESCENDING order when interpreted as numbers
     """
     my_table.sort(key = lambda row: float(row[col_idx]), reverse = True)
+    
+def test_code():
+
+    # Load a simple example table
+    test_table = read_csv_file("test_case.csv")  # file is available at ...
+    print_table(test_table)
+    print()
+
+    # Simple test for column trimmng function
+    print_table(select_columns(test_table, [0, 2]))
+    print()
+
+    # Simple test for column sorting function
+    sort_by_column(test_table, 3)
+    print_table(test_table)
+    print()
+
+    # Read cancer-risk data set, select columns A, B, C, E, and L, then sort by column E in descending order
+    cancer_risk_table = read_csv_file("cancer_risk05_v4_county.csv")
+    col_indices = [0, 1, 2, 4, 11]
+    trimmed_risk_table = select_columns(cancer_risk_table, col_indices)
+    sort_by_column(trimmed_risk_table, 4)
+    write_csv_file(trimmed_risk_table, "cancer_risk_trimmed.csv")
+
+test_code()
+
+#Output from test_code()
+##['1', '2', '3', '4']
+##['5', '6', '7', '8']
+##['-2', '-3', '-4', '-5']
+##
+##['1', '3']
+##['5', '7']
+##['-2', '-4']
+##
+##['5', '6', '7', '8']
+##['1', '2', '3', '4']
+##['-2', '-3', '-4', '-5']
+
 
